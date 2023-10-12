@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Garage.Wpf.Models;
 
 namespace Garage.Wpf.Views
 {
@@ -20,9 +21,20 @@ namespace Garage.Wpf.Views
     /// </summary>
     public partial class BrandView : UserControl
     {
+        public List<Brand> Brands { get; set; }
+
         public BrandView()
         {
             InitializeComponent();
+            this.Brands = new List<Brand>();
+
+            this.Brands.Add(new Brand("Audi"));
+            this.Brands.Add(new Brand("Peugeot"));
+            this.Brands.Add(new Brand("Citroën"));
+            this.Brands.Add(new Brand("Bugatti"));
+            this.Brands.Add(new Brand("Alpine"));
+            this.Brands.Add(new Brand("Renault"));
+
         }
     }
 }

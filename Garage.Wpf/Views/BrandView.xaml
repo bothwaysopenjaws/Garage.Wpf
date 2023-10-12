@@ -21,10 +21,14 @@
 		<TextBlock Grid.Row="0" Grid.Column="0" Text="Marque" />
 		<TextBlock Grid.Row="0" Grid.Column="2"  Text="Modèle" />
 
-		<ListBox x:Name="_BrandListBox" Grid.Column="0" Grid.Row="1" >
+		<ListBox x:Name="_BrandListBox" Grid.Column="0" Grid.Row="1"
+		Background="Chartreuse"
+						 ItemsSource="{Binding Brands}"
+						 
+						 >
 			
 		</ListBox>
-		<ListBox x:Name="_ModelListBox" Grid.Column="0" Grid.Row="1">
+		<ListBox x:Name="_ModelListBox" Grid.Column="2" Grid.Row="1">
 		</ListBox>
 
 		<GroupBox Header="Marque" Grid.Column="1" Grid.Row="1">
