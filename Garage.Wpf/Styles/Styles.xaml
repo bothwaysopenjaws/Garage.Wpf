@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style x:Key="TextBlockStyle" TargetType="TextBlock">
+		<Style.Setters>
+			<Setter Property="Margin" Value="2"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Foreground" Value="DarkKhaki"/>
+		</Style.Setters>
+	</Style>
+    
+</ResourceDictionary>
