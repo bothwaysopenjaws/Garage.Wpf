@@ -46,7 +46,6 @@
 				<TextBox x:Name="_BrandNameTextBox" Grid.Row="0" Grid.Column="1" DataContext="{Binding SelectedBrand.Name}" />
 				<Button x:Name="UpdateBrandButton" Grid.Row="1" Grid.Column="0" Content="Modifier" Click="UpdateBrandButton_Click"  />
 				<Button x:Name="DeleteBrandButton" Grid.Row="1" Grid.Column="1" Content="Supprimer" Click="DeleteBrandButton_Click" />
-
 			</Grid>
 		</GroupBox>
 			

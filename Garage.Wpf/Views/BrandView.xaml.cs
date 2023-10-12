@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Garage.Wpf.Models;
+using Garage.Wpf.ViewModels;
 
 namespace Garage.Wpf.Views
 {
@@ -22,37 +23,14 @@ namespace Garage.Wpf.Views
     public partial class BrandView : UserControl
     {
 
-        #region Properties
-
-        /// <summary>
-        /// Liste des marques
-        /// </summary>
-        public List<Brand> Brands { get; set; }
-
-        /// <summary>
-        /// La marque sélectionnée
-        /// </summary>
-        public Brand? SelectedBrand { get; set; }
-        #endregion
-
         #region Constructors
-
-        /// <summary>
+/// <summary>
         /// Instancie le contrôle utilisateur de la vue
         /// </summary>
         public BrandView()
         {
             InitializeComponent();
-            this.Brands = new List<Brand>();
-
-            this.Brands.Add(new Brand("Audi"));
-            this.Brands.Add(new Brand("Peugeot"));
-            this.Brands.Add(new Brand("Citroën"));
-            this.Brands.Add(new Brand("Bugatti"));
-            this.Brands.Add(new Brand("Alpine"));
-            this.Brands.Add(new Brand("Renault"));
-            this.DataContext = this;
-
+            this.DataContext = new ViewModelBrandView();
         }
 
         #endregion
@@ -66,15 +44,14 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void _BrandListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SelectedBrand == null)
+            
+            if (((ViewModelBrandView)this.DataContext).SelectedBrand == null)
             {
-                _BrandGroupBox.Visibility = Visibility.Collapsed;
                 _BrandNameTextBox.Text = "";
             }
             else
             {
-                _BrandGroupBox.Visibility = Visibility.Visible;
-                _BrandNameTextBox.Text = SelectedBrand.Name;
+                _BrandNameTextBox.Text = ((ViewModelBrandView)this.DataContext).SelectedBrand.Name;
             }
 
         }
@@ -86,9 +63,9 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void UpdateBrandButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedBrand != null)
+            if (((ViewModelBrandView)this.DataContext).SelectedBrand != null)
             {
-                SelectedBrand.Name = _BrandNameTextBox.Text;
+                ((ViewModelBrandView)this.DataContext).SelectedBrand.Name = _BrandNameTextBox.Text;
 
             }
         }
@@ -100,9 +77,9 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void DeleteBrandButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedBrand != null)
+            if (((ViewModelBrandView)this.DataContext).SelectedBrand != null)
             {
-                this.Brands?.Remove(SelectedBrand);
+                ((ViewModelBrandView)this.DataContext).Brands?.Remove(((ViewModelBrandView)this.DataContext).SelectedBrand);
             }
         }
 
@@ -113,11 +90,10 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void _AddBrandButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Brands.Add(new Brand("Nouvelle marque"));
+            ((ViewModelBrandView)this.DataContext).Brands.Add(new Brand("Nouvelle marque"));
         }
 
         #endregion
-
 
     }
 }
