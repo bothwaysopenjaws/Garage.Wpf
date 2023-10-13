@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Garage.Wpf.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Garage.Wpf.Models
 {
-    public class Model
+    public class Model : ObservableObject
     {
         #region Attributes
 
@@ -21,7 +22,7 @@ namespace Garage.Wpf.Models
         /// <summary>
         /// Obtient ou défini le nom
         /// </summary>
-        public string Name { get => _Name; set => _Name = value; }
+        public string Name { get => _Name; set => SetProperty(nameof(Name), ref _Name, value);}
 
         #endregion
 

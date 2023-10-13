@@ -37,6 +37,7 @@ namespace Garage.Wpf.Views
 
         #region Methods
 
+        #region Marques
         /// <summary>
         /// Manage la modification de sélection de marque
         /// </summary>
@@ -44,7 +45,7 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void _BrandListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
             if (((ViewModelBrandView)this.DataContext).SelectedBrand == null)
             {
                 _BrandNameTextBox.Text = "";
@@ -94,6 +95,71 @@ namespace Garage.Wpf.Views
         }
 
         #endregion
+
+        #region Modèles
+
+        /// <summary>
+        /// Manage la modification de sélection d'un modèle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _ModelListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (((ViewModelBrandView)this.DataContext).SelectedModel == null)
+            {
+                _ModelNameTextBox.Text = "";
+            }
+            else
+            {
+                _ModelNameTextBox.Text = ((ViewModelBrandView)this.DataContext).SelectedModel.Name;
+            }
+
+        }
+
+        /// <summary>
+        /// Met à jour un modèle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateModelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (((ViewModelBrandView)this.DataContext).SelectedModel != null)
+            {
+                ((ViewModelBrandView)this.DataContext).SelectedModel.Name = _ModelNameTextBox.Text;
+
+            }
+        }
+
+        /// <summary>
+        /// Supprime un modèle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteModelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (((ViewModelBrandView)this.DataContext).SelectedModel != null)
+            {
+                ((ViewModelBrandView)this.DataContext).SelectedBrand.Models?.Remove(((ViewModelBrandView)this.DataContext).SelectedModel);
+            }
+        }
+
+        /// <summary>
+        /// Permet l'ajout d'un modèle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _AddModelButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((ViewModelBrandView)this.DataContext).SelectedBrand.Models.Add(new Model("Nouvelle marque"));
+        }
+
+        #endregion
+
+        #endregion
+
+
+
 
     }
 }

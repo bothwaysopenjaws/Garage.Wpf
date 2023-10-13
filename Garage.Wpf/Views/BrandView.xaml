@@ -10,6 +10,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
@@ -18,21 +19,28 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<TextBlock Grid.Row="0" Grid.Column="0" Text="Marque" />
-		<TextBlock Grid.Row="0" Grid.Column="2"  Text="Modèle" />
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="Marque" Style="{StaticResource LabelBrandHeaderStyle}" />
+		<TextBlock Grid.Row="0" Grid.Column="2"  Text="Modèle" Style="{StaticResource LabelBrandHeaderStyle}" />
 
 		<ListBox x:Name="_BrandListBox" Grid.Column="0" Grid.Row="1"
 						 ItemsSource="{Binding Brands}"
 						 DisplayMemberPath="Name"
 						 SelectedItem="{Binding SelectedBrand}"
 						 SelectionChanged="_BrandListBox_SelectionChanged"
+						 Grid.RowSpan="2"
 						 >
 		</ListBox>
-		<ListBox x:Name="_ModelListBox" Grid.Column="2" Grid.Row="1" 				ItemsSource="{Binding SelectedBrand.Models}"
+		<ListBox x:Name="_ModelListBox" 
+						 Grid.Column="2" 
+						 Grid.Row="1"  
+						 Grid.RowSpan="2"			
+						 ItemsSource="{Binding SelectedBrand.Models}"
 						 DisplayMemberPath="Name"
-						 SelectedItem="{Binding SelectedModel}">
+						 SelectedItem="{Binding SelectedModel}"
+						 SelectionChanged="_ModelListBox_SelectionChanged">
 		</ListBox>
-		<Button x:Name="_AddBrandButton" Content="Ajouter" Grid.Row="2" Grid.Column="0" Click="_AddBrandButton_Click" />
+		<Button x:Name="_AddBrandButton" Content="Ajouter" Grid.Row="3" Grid.Column="0" Click="_AddBrandButton_Click" />
+		<Button x:Name="_AddModelButton" Content="Ajouter" Grid.Row="3" Grid.Column="2" Click="_AddModelButton_Click" />
 		<GroupBox x:Name="_BrandGroupBox" Header="Marque" Grid.Column="1" Grid.Row="1" Visibility="{Binding SelectedBrand, Converter={StaticResource SharedObjectToVisibilityConverter}}">
 			<Grid>
 				<Grid.ColumnDefinitions>
@@ -47,10 +55,26 @@
 				<Label Grid.Row="0" Grid.Column="0" Content="Nom : "/>
 				<TextBox x:Name="_BrandNameTextBox" Grid.Row="0" Grid.Column="1" DataContext="{Binding SelectedBrand.Name}" />
 				<Button x:Name="UpdateBrandButton" Grid.Row="1" Grid.Column="0" Content="Modifier" Click="UpdateBrandButton_Click"  />
-				<Button x:Name="DeleteBrandButton" Grid.Row="1" Grid.Column="1" Content="Supprimer" Click="DeleteBrandButton_Click" />
+				<Button x:Name="DeleteBrandButton" Grid.Row="1" Grid.Column="1" Content="Supprimer" Click="DeleteModelButton_Click" />
 			</Grid>
 		</GroupBox>
-			
+		<GroupBox x:Name="_ModelGroupBox" Header="Modèle" Grid.Column="1" Grid.Row="2" Visibility="{Binding SelectedModel, Converter={StaticResource SharedObjectToVisibilityConverter}}">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Label Grid.Row="0" Grid.Column="0" Content="Nom : "/>
+				<TextBox x:Name="_ModelNameTextBox" Grid.Row="0" Grid.Column="1" DataContext="{Binding SelectedModel.Name}" />
+				<Button x:Name="UpdateModelButton" Grid.Row="1" Grid.Column="0" Content="Modifier" Click="UpdateModelButton_Click"  />
+				<Button x:Name="DeleteModelButton" Grid.Row="1" Grid.Column="1" Content="Supprimer" Click="DeleteModelButton_Click" />
+			</Grid>
+		</GroupBox>
 
 
 	</Grid>

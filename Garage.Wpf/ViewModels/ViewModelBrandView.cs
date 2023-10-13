@@ -25,7 +25,7 @@ namespace Garage.Wpf.ViewModels
         /// <summary>
         /// Le modèle sélectionné
         /// </summary>
-        private Brand? _SelectedModel;
+        private Model? _SelectedModel;
 
         #endregion
 
@@ -48,9 +48,9 @@ namespace Garage.Wpf.ViewModels
             set => SetProperty(nameof(SelectedBrand), ref _SelectedBrand, value); 
         }
 
-        public Brand? SelectedModel
+        public Model? SelectedModel
         {
-            get => _SelectedBrand;
+            get => _SelectedModel;
             set => SetProperty(nameof(SelectedModel), ref _SelectedModel, value);
         }
         #endregion
