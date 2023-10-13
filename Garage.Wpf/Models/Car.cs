@@ -11,6 +11,11 @@ namespace Garage.Wpf.Models
         #region Attributes
 
         /// <summary>
+        /// Identifiant
+        /// </summary>
+        private int _Identifier;
+
+        /// <summary>
         /// Modèle
         /// </summary>
         private Model _Model;
@@ -30,7 +35,13 @@ namespace Garage.Wpf.Models
         #endregion
 
         #region Properties
-      /// <summary>
+
+        /// <summary>
+        /// Obtient l'identifiant
+        /// </summary>
+        public int Identifier { get => _Identifier; set => _Identifier = value; }
+
+        /// <summary>
         /// Obtient ou défini le modèle
         /// </summary>
         public Model Model { get => _Model; set => _Model = value; }
@@ -48,6 +59,8 @@ namespace Garage.Wpf.Models
         /// Immatriculation
         /// </summary>
         public string Registration { get => _Registration; set => _Registration = value; }
+
+
 
         #endregion
 

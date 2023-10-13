@@ -17,6 +17,11 @@ namespace Garage.Wpf.Models
         #region Attributes
 
         /// <summary>
+        /// Identifiant
+        /// </summary>
+        private int _Identifier;
+
+        /// <summary>
         /// Le nom
         /// </summary>
         private string _Name;
@@ -28,6 +33,9 @@ namespace Garage.Wpf.Models
         #endregion
 
         #region Properties
+
+        public int Identifier { get => _Identifier; set => _Identifier = value; }
+
         /// <summary>
         /// Obtient ou défini le nom
         /// </summary>
