@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Garage.Wpf.Models
 {
     /// <summary>
     /// Marque
-    /// </summary>
+    [Table("Brand")]
     public class Brand : ObservableObject
     {
         #region Attributes

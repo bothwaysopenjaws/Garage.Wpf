@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Garage.Wpf.Models
 {
+    /// <summary>
+    /// Voiture
+    /// </summary>
+    [Table("Car")]
     public class Car
     {
         #region Attributes
@@ -67,6 +72,14 @@ namespace Garage.Wpf.Models
         #endregion
 
         #region Constructors
+
+        /// <summary>
+        /// Constructeur vide
+        /// </summary>
+        public Car()
+        {
+               
+        }
 
         /// <summary>
         /// Instancie une voiture

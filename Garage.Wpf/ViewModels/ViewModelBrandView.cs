@@ -76,6 +76,15 @@ namespace Garage.Wpf.ViewModels
             this.Brands.Add(new Brand("Bugatti"));
             this.Brands.Add(new Brand("Alpine"));
             this.Brands.Add(new Brand("Renault"));
+
+            /*
+            using (GarageContext context = new GarageContext())
+            {
+                context.Brands.AddRange(Brands);
+                context.SaveChanges();
+            }
+            */
+
         }
 
         #endregion

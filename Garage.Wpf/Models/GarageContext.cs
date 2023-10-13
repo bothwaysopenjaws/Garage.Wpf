@@ -33,7 +33,7 @@ namespace Garage.Wpf.Models
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=Garage;Trusted_Connexion=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=Garage;Trusted_Connection=True;TrustServerCertificate=True;");
         }
     }
 }
