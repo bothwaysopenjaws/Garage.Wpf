@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Garage.Wpf.Models
 {
@@ -34,6 +35,7 @@ namespace Garage.Wpf.Models
 
         #region Properties
 
+        [Key]
         public int Identifier { get => _Identifier; set => _Identifier = value; }
 
         /// <summary>
