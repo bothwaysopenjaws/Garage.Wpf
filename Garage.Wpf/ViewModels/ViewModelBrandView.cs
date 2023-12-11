@@ -117,6 +117,21 @@ namespace Garage.Wpf.ViewModels
             }
         }
 
+
+        internal void RemoveBrand()
+        {
+            if (this.SelectedBrand is not null)
+            {
+                using (GarageContext context = new())
+                {
+                    context.Remove(this.SelectedBrand);
+                    context.SaveChanges();
+                }
+                this.Brands?.Remove(this.SelectedBrand);
+            }
+        }
+
+
         #endregion
 
         #region mockups

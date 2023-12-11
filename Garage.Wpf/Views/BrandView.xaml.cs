@@ -55,9 +55,7 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void DeleteBrandButton_Click(object sender, RoutedEventArgs e)
         {
-            Brand? brand = (DataContext as ViewModelBrandView)?.SelectedBrand;
-            if (brand != null)
-                ((ViewModelBrandView)this.DataContext).Brands?.Remove(brand);
+                ((ViewModelBrandView)this.DataContext).RemoveBrand();
         }
         /*
         /// <summary>
