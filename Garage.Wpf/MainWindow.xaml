@@ -61,6 +61,10 @@
 						<Button Content="Annuler"   Width="80" Margin="2"  />
 
 					</StackPanel>
+
+					<DataGrid>
+						
+					</DataGrid>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Gestion des marques" >

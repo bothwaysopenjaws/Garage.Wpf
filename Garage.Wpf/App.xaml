@@ -15,7 +15,6 @@
 				<ResourceDictionary Source="./Styles/Styles.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<converters:ObjectToVisibilityConverter x:Key="SharedObjectToVisibilityConverter"/>
-
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

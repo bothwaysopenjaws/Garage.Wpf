@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Garage.Wpf.Models;
 using Garage.Wpf.ViewModels;
+using Garage.Core;
+using Garage.DbLib.Models;
 
 namespace Garage.Wpf.Views
 {
@@ -38,24 +28,13 @@ namespace Garage.Wpf.Views
         #region Methods
 
         #region Marques
+
         /// <summary>
         /// Manage la modification de sélection de marque
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _BrandListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (((ViewModelBrandView)this.DataContext).SelectedBrand == null)
-            {
-                _BrandNameTextBox.Text = "";
-            }
-            else
-            {
-                _BrandNameTextBox.Text = ((ViewModelBrandView)this.DataContext).SelectedBrand.Name;
-            }
-
-        }
+        private void BrandListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => _BrandNameTextBox.Text = (DataContext as ViewModelBrandView)?.SelectedBrand?.Name ?? "";
 
         /// <summary>
         /// Met à jour une marque
@@ -64,11 +43,9 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void UpdateBrandButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((ViewModelBrandView)this.DataContext).SelectedBrand != null)
-            {
-                ((ViewModelBrandView)this.DataContext).SelectedBrand.Name = _BrandNameTextBox.Text;
-
-            }
+            Brand? brand = (DataContext as ViewModelBrandView)?.SelectedBrand;
+            if (brand is not null)
+                brand.Name = _BrandNameTextBox.Text;
         }
 
         /// <summary>
@@ -78,21 +55,15 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void DeleteBrandButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((ViewModelBrandView)this.DataContext).SelectedBrand != null)
-            {
-                ((ViewModelBrandView)this.DataContext).Brands?.Remove(((ViewModelBrandView)this.DataContext).SelectedBrand);
-            }
+                ((ViewModelBrandView)this.DataContext).RemoveBrand();
         }
-
+        /*
         /// <summary>
         /// Permet l'ajout d'une marque
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _AddBrandButton_Click(object sender, RoutedEventArgs e)
-        {
-            ((ViewModelBrandView)this.DataContext).Brands.Add(new Brand("Nouvelle marque"));
-        }
+        private void AddBrandButton_Click(object sender, RoutedEventArgs e) => ((ViewModelBrandView)this.DataContext).Brands.Add(new Brand("Nouvelle marque"));*/
 
         #endregion
 
@@ -103,19 +74,8 @@ namespace Garage.Wpf.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _ModelListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (((ViewModelBrandView)this.DataContext).SelectedModel == null)
-            {
-                _ModelNameTextBox.Text = "";
-            }
-            else
-            {
-                _ModelNameTextBox.Text = ((ViewModelBrandView)this.DataContext).SelectedModel.Name;
-            }
-
-        }
+        private void ModelListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => _ModelNameTextBox.Text = (DataContext as ViewModelBrandView)?.SelectedModel?.Name ??
+             "";
 
         /// <summary>
         /// Met à jour un modèle
@@ -124,9 +84,10 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void UpdateModelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((ViewModelBrandView)this.DataContext).SelectedModel != null)
+            Model? model = (this.DataContext as ViewModelBrandView)?.SelectedModel;
+            if (model != null)
             {
-                ((ViewModelBrandView)this.DataContext).SelectedModel.Name = _ModelNameTextBox.Text;
+                model.Name = _ModelNameTextBox.Text;
 
             }
         }
@@ -138,9 +99,10 @@ namespace Garage.Wpf.Views
         /// <param name="e"></param>
         private void DeleteModelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((ViewModelBrandView)this.DataContext).SelectedModel != null)
+            Model? model = (DataContext as ViewModelBrandView)?.SelectedModel;
+            if (model is not null)
             {
-                ((ViewModelBrandView)this.DataContext).SelectedBrand.Models?.Remove(((ViewModelBrandView)this.DataContext).SelectedModel);
+                _ = ((DataContext as ViewModelBrandView)?.SelectedBrand?.Models?.Remove(model));
             }
         }
 
@@ -149,10 +111,7 @@ namespace Garage.Wpf.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _AddModelButton_Click(object sender, RoutedEventArgs e)
-        {
-            ((ViewModelBrandView)this.DataContext).SelectedBrand.Models.Add(new Model("Nouvelle marque"));
-        }
+        private void AddModelButton_Click(object sender, RoutedEventArgs e) => (DataContext as ViewModelBrandView)?.SelectedBrand?.Models.Add(new Model("Nouvelle marque"));
 
         #endregion
 

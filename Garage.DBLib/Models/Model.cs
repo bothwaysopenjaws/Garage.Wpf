@@ -1,4 +1,4 @@
-﻿using Garage.Wpf.Core;
+﻿using Garage.Core.Observable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Garage.Wpf.Models
+namespace Garage.DbLib.Models
 {
     /// <summary>
     /// Modèle d'une voiture

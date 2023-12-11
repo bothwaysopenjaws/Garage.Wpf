@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Garage.Wpf.Core
+namespace Garage.Core.Observable
 {
 
     public abstract class ObservableObject : INotifyPropertyChanged, INotifyPropertyChanging
@@ -48,8 +48,10 @@ namespace Garage.Wpf.Core
         /// <param name="propertyName">Nom de la propriété</param>
         /// <param name="field">Référence de l'attribut à assigner</param>
         /// <param name="value"> Valeur</param>
-        protected void SetProperty<T>( string propertyName, ref T field, T value)
+        protected void SetProperty<T>( string propertyName, ref T field, T value, bool nullable = true)
         {
+            if (value is null && !nullable)
+                throw new ArgumentNullException(nameof(T) + "N'accepte pas de valeur null");
             if ((field == null && value != null)
                 || (field?.Equals(value) == false))
             {

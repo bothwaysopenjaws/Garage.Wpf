@@ -26,7 +26,7 @@
 						 ItemsSource="{Binding Brands}"
 						 DisplayMemberPath="Name"
 						 SelectedItem="{Binding SelectedBrand}"
-						 SelectionChanged="_BrandListBox_SelectionChanged"
+						 SelectionChanged="BrandListBox_SelectionChanged"
 						 Grid.RowSpan="2"
 						 >
 		</ListBox>
@@ -37,10 +37,10 @@
 						 ItemsSource="{Binding SelectedBrand.Models}"
 						 DisplayMemberPath="Name"
 						 SelectedItem="{Binding SelectedModel}"
-						 SelectionChanged="_ModelListBox_SelectionChanged">
+						 SelectionChanged="ModelListBox_SelectionChanged">
 		</ListBox>
-		<Button x:Name="_AddBrandButton" Content="Ajouter" Grid.Row="3" Grid.Column="0" Click="_AddBrandButton_Click" />
-		<Button x:Name="_AddModelButton" Content="Ajouter" Grid.Row="3" Grid.Column="2" Click="_AddModelButton_Click" />
+		<Button x:Name="_AddBrandButton" Command="{Binding CmdAddBrand}" Content="Ajouter" Grid.Row="3" Grid.Column="0" />
+		<Button x:Name="_AddModelButton" Content="Ajouter" Grid.Row="3" Grid.Column="2" Click="AddModelButton_Click" />
 		<GroupBox x:Name="_BrandGroupBox" Header="Marque" Grid.Column="1" Grid.Row="1" Visibility="{Binding SelectedBrand, Converter={StaticResource SharedObjectToVisibilityConverter}}">
 			<Grid>
 				<Grid.ColumnDefinitions>

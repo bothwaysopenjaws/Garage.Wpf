@@ -1,14 +1,10 @@
-﻿using Garage.Wpf.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using Garage.DbLib.Models;
+using Prism.Commands;
 
 namespace Garage.Wpf.ViewModels
 {
-    class ViewModelBrandView : ViewModelBase
+    public class ViewModelBrandView : ViewModelBase
     {
         #region Attributes
 
@@ -26,6 +22,12 @@ namespace Garage.Wpf.ViewModels
         /// Le modèle sélectionné
         /// </summary>
         private Model? _SelectedModel;
+
+        #region Commands
+
+        private DelegateCommand<object> _CmdAddBrand;
+
+        #endregion
 
         #endregion
 
@@ -53,13 +55,92 @@ namespace Garage.Wpf.ViewModels
             get => _SelectedModel;
             set => SetProperty(nameof(SelectedModel), ref _SelectedModel, value);
         }
+        public DelegateCommand<object> CmdAddBrand 
+        { 
+            get => _CmdAddBrand; 
+            set => _CmdAddBrand = value; 
+        }
+
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Constructeur du VM des marques
+        /// </summary>
         public ViewModelBrandView()
         {
-            ObservableCollection<Model> audiModels = new ObservableCollection<Model>()
+            CmdAddBrand = new DelegateCommand<object>(AddBrand, CanAddBrand).ObservesProperty(() => this.SelectedBrand);
+            
+            using (GarageContext context = new GarageContext())
+            {
+                if (!context.Brands.Any())
+                {
+                    this.Brands = GenerateData();
+                    context.Brands.AddRange(Brands);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    this.Brands = new ObservableCollection<Brand>(context.Brands);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Commands
+
+        private void AddBrand(object parameter = null)
+        {
+            Brand brand = new Brand("Nouvelle marque");
+            this.Brands.Add(brand);
+
+            using (GarageContext context = new GarageContext())
+            {
+                context.Brands.Add(brand);
+                context.SaveChanges();
+            }
+
+        }
+
+        private bool CanAddBrand(object parameter = null) => !(this.SelectedBrand == null);
+
+        private void ReloadContext()
+        {
+            this.Brands.Clear();
+            using (GarageContext context = new GarageContext())
+            {
+                context.Brands.Add(new Brand("Nouvelle marque"));
+                //this._Brands context.Brands.ToList();
+                context.SaveChanges();
+            }
+        }
+
+
+        internal void RemoveBrand()
+        {
+            if (this.SelectedBrand is not null)
+            {
+                using (GarageContext context = new())
+                {
+                    context.Remove(this.SelectedBrand);
+                    context.SaveChanges();
+                }
+                this.Brands?.Remove(this.SelectedBrand);
+            }
+        }
+
+
+        #endregion
+
+        #region mockups
+
+
+        public ObservableCollection<Brand> GenerateData()
+        {
+            ObservableCollection<Brand> brands = new();
+            ObservableCollection<Model> audiModels = new()
             {
                 new Model("A4"),
                 new Model("A3"),
@@ -68,25 +149,16 @@ namespace Garage.Wpf.ViewModels
                 new Model("RS6"),
                 new Model("R8"),
             };
+            
+            this.Brands.Add(new("Audi") { Models = audiModels });
+            this.Brands.Add(new("Peugeot"));
+            this.Brands.Add(new("Citroën"));
+            this.Brands.Add(new("Bugatti"));
+            this.Brands.Add(new("Alpine"));
+            this.Brands.Add(new("Renault"));
 
-            this.Brands = new ObservableCollection<Brand>();
-            this.Brands.Add(new Brand("Audi") { Models= audiModels });
-            this.Brands.Add(new Brand("Peugeot"));
-            this.Brands.Add(new Brand("Citroën"));
-            this.Brands.Add(new Brand("Bugatti"));
-            this.Brands.Add(new Brand("Alpine"));
-            this.Brands.Add(new Brand("Renault"));
-
-            /*
-            using (GarageContext context = new GarageContext())
-            {
-                context.Brands.AddRange(Brands);
-                context.SaveChanges();
-            }
-            */
-
+            return brands;
         }
-
         #endregion
 
     }

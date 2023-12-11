@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using Microsoft.IdentityModel.Protocols;
 
-namespace Garage.Wpf.Models
+namespace Garage.DbLib.Models
 {
     /// <summary>
     /// Contexte de la base de données
     /// </summary>
     public class GarageContext : DbContext
     {
+
         /// <summary>
         /// Liste des marques
         /// </summary>
@@ -33,7 +36,22 @@ namespace Garage.Wpf.Models
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=Garage;Trusted_Connection=True;TrustServerCertificate=True;");
+
+            ConnectionStringSettingsCollection settings =
+            ConfigurationManager.ConnectionStrings;
+
+            if (settings != null)
+            {
+                foreach (ConnectionStringSettings cs in settings)
+                {
+                    Console.WriteLine(cs.Name);
+                    Console.WriteLine(cs.ProviderName);
+                    Console.WriteLine(cs.ConnectionString);
+                }
+            }
+
+
+            optionsBuilder.UseSqlServer(System.Configuration.ConfigurationManager.ConnectionStrings["SQLServerConnection"].ConnectionString);
         }
     }
 }

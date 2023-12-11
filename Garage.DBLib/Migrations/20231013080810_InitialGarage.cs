@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Garage.Wpf.Migrations
+namespace Garage.DbLib.Migrations
 {
     /// <inheritdoc />
     public partial class InitialGarage : Migration
