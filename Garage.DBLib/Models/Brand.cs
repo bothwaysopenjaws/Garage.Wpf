@@ -1,15 +1,9 @@
-﻿using Garage.Wpf.Core;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Garage.Core.Observable;
 
-namespace Garage.Wpf.Models
+namespace Garage.DbLib.Models
 {
     /// <summary>
     /// Marque
@@ -45,7 +39,7 @@ namespace Garage.Wpf.Models
         public string Name 
         { 
             get => _Name;
-            set => SetProperty(nameof(Name), ref _Name, value); 
+            set => SetProperty(nameof(Name), ref _Name, value, false); 
         }
         
         /// <summary>
@@ -53,7 +47,7 @@ namespace Garage.Wpf.Models
         /// </summary>
         public ObservableCollection<Model> Models 
         { get => _Models;
-            set => SetProperty(nameof(Models), ref _Models, value); 
+            set => SetProperty(nameof(Models), ref _Models, value, false); 
         }
 
         #endregion

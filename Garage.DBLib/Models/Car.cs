@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Garage.Wpf.Models
+namespace Garage.DbLib.Models
 {
     /// <summary>
     /// Voiture
